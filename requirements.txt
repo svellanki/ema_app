@@ -1,0 +1,8 @@
+fastapi
+uvicorn
+sqlalchemy
+pandas
+pandas_ta
+yfinance
+jinja2
+python-dotenv
