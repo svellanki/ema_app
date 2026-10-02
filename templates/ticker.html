@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>{{ ticker }} Backtest</h1>
+<p>CAGR: {{ "%.2f"|format(backtest.cagr_pct) }}% |
+Total Return: {{ "%.2f"|format(backtest.total_return_pct) }}% |
+Final Value: ${{ "%.2f"|format(backtest.final_value) }}</p>
+
+<h2>Trades</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Side</th>
+            <th>Price</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for t in trades %}
+        <tr>
+            <td>{{ t.date }}</td>
+            <td>{{ t.side }}</td>
+            <td>{{ "%.2f"|format(t.price) }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<h2>Series (last 100 rows)</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Close</th>
+            <th>EMA13</th>
+            <th>EMA50</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for row in series[-100:] %}
+        <tr>
+            <td>{{ row['Date'] }}</td>
+            <td>{{ "%.2f"|format(row['Close']) }}</td>
+            <td>{{ "%.2f"|format(row['EMA13']) }}</td>
+            <td>{{ "%.2f"|format(row['EMA50']) }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

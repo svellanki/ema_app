@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Signals</h1>
+<table>
+    <thead>
+        <tr>
+            <th>Ticker</th>
+            <th>Scan Date</th>
+            <th>Close</th>
+            <th>EMA13</th>
+            <th>EMA50</th>
+            <th>RSI</th>
+            <th>MACD Hist</th>
+            <th>CAGR %</th>
+            <th>Total Return %</th>
+            <th>Final Value ($)</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for s in signals %}
+        <tr>
+            <td><a href="/ticker/{{ s.ticker }}">{{ s.ticker }}</a></td>
+            <td>{{ s.scan_date }}</td>
+            <td>{{ "%.2f"|format(s.close) }}</td>
+            <td>{{ "%.2f"|format(s.ema13) }}</td>
+            <td>{{ "%.2f"|format(s.ema50) }}</td>
+            <td>{{ "%.2f"|format(s.rsi) }}</td>
+            <td>{{ "%.2f"|format(s.macd_hist) if s.macd_hist is not none else "" }}</td>
+            <td>{{ "%.2f"|format(s.cagr_pct) }}</td>
+            <td>{{ "%.2f"|format(s.total_return_pct) }}</td>
+            <td>{{ "%.2f"|format(s.final_value) }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
